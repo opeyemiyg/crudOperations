@@ -1,17 +1,24 @@
 <?php
 include 'connect.php';
+include 'header.php';
 if (isset($_POST['submit'])) {
+    print_r($_FILES['itemImg']);
     $name = $_POST['name'];
-    $email = $_POST['email'];
-    $mobile = $_POST['mobile'];
-    $password = $_POST['password'];
-    $sql = "INSERT INTO `crudtable` ( name,email,mobile,password) values('$name','$email','$mobile','$password')";
+    $category = $_POST['category'];
+    // $image = $_POST['image'];
+    $count = $_POST['count'];
+    $price = $_POST['price'] * (int)$count;
+    $sql = "INSERT INTO `crudtable` ( name,category,count,price) values('$name','$category','$count','$price')";
     $result = mysqli_query($con, $sql);
     if ($result) {
         header('location:display.php');
     } else {
         die(mysqli_error($con));
     }
+}
+if (isset($_POST['upload'])) {
+    echo "True";
+    // print_r($_FILES['itemImg']);
 }
 
 
@@ -40,19 +47,26 @@ if (isset($_POST['submit'])) {
                 <input type="text" class="form-control" placeholder="Enter your name" name="name" autocomplete="off">
             </div>
             <div class="mb-3">
-                <label>Email address</label>
-                <input type="email" class="form-control" placeholder="Enter your email" name="email" autocomplete="off">
-            </div>
-            <div class="mb-3">
-                <label>Mobile Number</label>
-                <input type="text" class="form-control" placeholder="Enter your mobile number" name="mobile"
+                <label>Category</label>
+                <input type="category" class="form-control" placeholder="Enter the item category" name="category"
                     autocomplete="off">
             </div>
             <div class="mb-3">
-                <label>Password</label>
-                <input type="password" class="form-control" placeholder="Enter your password" name="password"
-                    autocomplete="off">
+                <label>Price</label>
+                <input type="text" class="form-control" placeholder="Enter Price" name="price" autocomplete="off">
             </div>
+            <div class="mb-3">
+                <label>Quantity</label>
+                <input type="number" class="form-control col-auto" name="count">
+
+            </div>
+            <!-- <div class="mb-3">
+                <label>Upload item image</label>
+                <input type="file" class="form-control col-auto" name="itemImg">
+                <input type="submit" class="form-control col-auto" name="upload" value="Upload">
+
+            </div> -->
+
 
             <button type="submit" class="btn btn-primary" name="submit">Submit</button>
         </form>

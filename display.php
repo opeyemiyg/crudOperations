@@ -1,5 +1,6 @@
 <?php
 include 'connect.php';
+include 'header.php';
 ?>
 
 <html lang="en">
@@ -17,17 +18,21 @@ include 'connect.php';
 <body>
     <div class="container">
         <button type="add" class="btn btn-primary my-5" name="add">
-            <a href="user.php" class="text-light ">Add user</a>
+            <a href="user.php" class="text-light ">Add Item</a>
+
+
 
         </button>
+
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">Unique id</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Mobile</th>
-                    <th scope="col">Password</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Total Price</th>
+                    <th scope="col">Count</th>
+                    <th scope="col">Image</th>
                     <th scope="col">Operations</th>
                 </tr>
             </thead>
@@ -40,18 +45,22 @@ include 'connect.php';
                     while ($row = mysqli_fetch_assoc($result)) {
                         $id = $row['id'];
                         $name = $row['name'];
-                        $email = $row['email'];
-                        $mobile = $row['mobile'];
-                        $password = $row['password'];
+                        $category = $row['category'];
+                        $price = $row['price'];
+                        $image = $row['image'];
+                        $count = $row['count'];
                         echo '<tr>
                             <th scope="row">' . $id . '</th>
                             <td>' . $name . '</td>
-                            <td>' . $email . '</td>
-                            <td>' . $mobile . '</td>
-                            <td>' . $password . '</td>
+                            <td>' . $category . '</td>
+                            <td>' . $price . '</td>
+                            <td>' . $count . '</td>
+                            <td>' . $image . '</td>
                             <td>
                             <button class="btn btn-primary"><a href="update.php?updateid=' . $id . '"  class="text-light ">Update</a> </button>
                             <button class="btn btn-primary"><a href="delete.php?deleteid=' . $id . ' " class="text-light ">Delete</a></button>
+                            
+
                            
                 
                         </td>

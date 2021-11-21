@@ -1,21 +1,27 @@
 <?php
 include 'connect.php';
+include 'header.php';
 $id = $_GET['updateid'];
 $sql = "SELECT *  FROM `crudtable` WHERE id=$id";
 $result = mysqli_query($con, $sql);
 $row = mysqli_fetch_assoc($result);
+echo $row['name'];
 $name = $row['name'];
-$email = $row['email'];
-$mobile = $row['mobile'];
-$password = $row['password'];
+$category = $row['category'];
+// $image = $row['image'];
+$price = $row['price'];
+$count = $row['count'];
 
-if (isset($_POST['submit'])) {
+
+if (isset($_POST['update'])) {
+
     $name = $_POST['name'];
-    $email = $_POST['email'];
-    $mobile = $_POST['mobile'];
-    $password = $_POST['password'];
-    $sql = "UPDATE `crudtable` SET id=$id, name='$name', email='$email',
-    mobile='$mobile',password='$password' WHERE id =$id";
+    $category = $_POST['category'];
+    // $image = $_POST['image'];
+    $count = $_POST['count'];
+    $price = $_POST['price'] * (int)$count;
+    $sql = "UPDATE `crudtable` SET id=$id, name='$name', category='$category',
+    count='$count',price='$price' WHERE id =$id";
     $result = mysqli_query($con, $sql);
     if ($result) {
         header('location:display.php');
@@ -47,26 +53,23 @@ if (isset($_POST['submit'])) {
         <form method="post">
             <div class="mb-3">
                 <label>Name</label>
-                <input type="text" class="form-control" placeholder="Enter your name" name="name" autocomplete="off"
-                    value=<?php echo $name ?>>
+                <input type="text" class="form-control" placeholder="Enter your name" name="name" autocomplete="off">
             </div>
             <div class="mb-3">
-                <label>Email address</label>
-                <input type="email" class="form-control" placeholder="Enter your email" name="email" autocomplete="off"
-                    value=<?php echo $email ?>>
+                <label>Category</label>
+                <input type="category" class="form-control" placeholder="Enter the item category" name="category"
+                    autocomplete="off">
             </div>
             <div class="mb-3">
-                <label>Mobile Number</label>
-                <input type="text" class="form-control" placeholder="Enter your mobile number" name="mobile"
-                    autocomplete="off" value=<?php echo $mobile ?>>
+                <label>Price</label>
+                <input type="text" class="form-control" placeholder="Enter Price" name="price" autocomplete="off">
             </div>
             <div class="mb-3">
-                <label>Password</label>
-                <input type="password" class="form-control" placeholder="Enter your password" name="password"
-                    autocomplete="off" value=<?php echo $password ?>>
-            </div>
+                <label>Quantity</label>
+                <input type="number" class="form-control col-auto" name="count">
 
-            <button type="submit" class="btn btn-primary" name="submit">Update</button>
+            </div>
+            <button type="submit" class="btn btn-primary" name="update">Update</button>
         </form>
     </div>
 
