@@ -2,7 +2,7 @@
 include 'connect.php';
 include 'header.php';
 if (isset($_POST['submit'])) {
-    print_r($_FILES['itemImg']);
+
     $name = $_POST['name'];
     $category = $_POST['category'];
     // $image = $_POST['image'];
@@ -17,8 +17,7 @@ if (isset($_POST['submit'])) {
     }
 }
 if (isset($_POST['upload'])) {
-    echo "True";
-    // print_r($_FILES['itemImg']);
+    print_r($_FILES['itemImg']);
 }
 
 
@@ -41,8 +40,8 @@ if (isset($_POST['upload'])) {
 
 
     <div class="container my-5">
-        <form method="post">
-            <div class="mb-3">
+        <form method="post" enctype="multipart/form-data">
+            <div class=" mb-3">
                 <label>Name</label>
                 <input type="text" class="form-control" placeholder="Enter your name" name="name" autocomplete="off">
             </div>
@@ -60,12 +59,12 @@ if (isset($_POST['upload'])) {
                 <input type="number" class="form-control col-auto" name="count">
 
             </div>
-            <!-- <div class="mb-3">
+            <div class="mb-3">
                 <label>Upload item image</label>
                 <input type="file" class="form-control col-auto" name="itemImg">
                 <input type="submit" class="form-control col-auto" name="upload" value="Upload">
 
-            </div> -->
+            </div>
 
 
             <button type="submit" class="btn btn-primary" name="submit">Submit</button>
